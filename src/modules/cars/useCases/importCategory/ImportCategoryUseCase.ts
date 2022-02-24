@@ -1,7 +1,7 @@
 import { parse as csvParse } from "csv-parse";
 import fs from "fs";
 import { inject, injectable } from "tsyringe";
-import { ICategoriesRepository } from "../../repositories/protocols/ICategoriesRepository";
+import { ICategoriesRepository } from "@modules/cars/repositories/protocols/ICategoriesRepository";
 
 interface IRequest {
   file: Express.Multer.File;

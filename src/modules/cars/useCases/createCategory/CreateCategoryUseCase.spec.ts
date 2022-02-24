@@ -1,6 +1,6 @@
-import { AppError } from "../../../../errors/AppError"
-import { CategoriesRepositoryInMemory } from "../../repositories/in-memory/CategoriesRepositoryInMemory"
-import { ICategoriesRepository } from "../../repositories/protocols/ICategoriesRepository"
+import { AppError } from "@errors/AppError"
+import { CategoriesRepositoryInMemory } from "@modules/cars/repositories/in-memory/CategoriesRepositoryInMemory"
+import { ICategoriesRepository } from "@modules/cars/repositories/protocols/ICategoriesRepository"
 import { CreateCategoryUseCase } from "./CreateCategoryUseCase"
 
 interface IFakeCategory {

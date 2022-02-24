@@ -1,8 +1,8 @@
-import { AppError } from "../../../../errors/AppError";
-import { UserRepositoryInMemory } from "../../repositories/in-memory/UserRepositoryInMemory";
-import { IUsersRepository } from "../../repositories/protocols/IUsersRepository";
-import { CreateUserUseCase } from "../createUser/CreateUserUseCase";
+import { UserRepositoryInMemory } from "@modules/accounts/repositories/in-memory/UserRepositoryInMemory";
+import { IUsersRepository } from "@modules/accounts/repositories/protocols/IUsersRepository";
+import { CreateUserUseCase } from "@modules/accounts/useCases/createUser/CreateUserUseCase";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase"
+import { AppError } from "@errors/AppError";
 
 interface ISutAuthenticate {
   userRepositoryInMemory: IUsersRepository;
