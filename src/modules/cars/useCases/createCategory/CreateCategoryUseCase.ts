@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe"
-import { AppError } from "@errors/AppError"
-import { CategoriesRepository } from "@modules/cars/repositories/implementations/CategoriesRepository"
+import { AppError } from "@shared/errors/AppError"
+import { CategoriesRepository } from "@modules/cars/infra/typeorm/repositories/CategoriesRepository"
 import { ICategoriesRepository } from "@modules/cars/repositories/protocols/ICategoriesRepository"
 
 interface IRequest {

@@ -2,7 +2,7 @@ import { UserRepositoryInMemory } from "@modules/accounts/repositories/in-memory
 import { IUsersRepository } from "@modules/accounts/repositories/protocols/IUsersRepository";
 import { CreateUserUseCase } from "@modules/accounts/useCases/createUser/CreateUserUseCase";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase"
-import { AppError } from "@errors/AppError";
+import { AppError } from "@shared/errors/AppError";
 
 interface ISutAuthenticate {
   userRepositoryInMemory: IUsersRepository;
