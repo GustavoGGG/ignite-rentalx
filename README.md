@@ -1,2 +1,2 @@
 # ignite-rentx
-Api para controle venda de Veículos
+Api para controle aluguel de Veículos
