@@ -1,18 +1,9 @@
+import { ICreateCartDTO } from "@modules/cars/dtos/ICreateCarDTO";
 import { CarsRepositoryInMemory } from "@modules/cars/repositories/in-memory/CarsRepositoryInMemory";
 import { ICarsRepository } from "@modules/cars/repositories/protocols/ICarsRepository";
 import { AppError } from "@shared/errors/AppError";
 import { CreateCarUseCase } from "./CreateCarUseCase";
 
-interface IFakeCar {
-  name: string;
-  description: string;
-  daily_rate: number;
-  license_plate: string;
-  fine_amount: number;
-  brand: string;
-  category_id: string;
-
-}
 interface ISutCar {
   createCarUseCase: CreateCarUseCase,
   carsRepository: ICarsRepository
@@ -23,7 +14,7 @@ const makeSut = (): ISutCar => {
   return { createCarUseCase, carsRepository };
 }
 
-const makeFakeCar = (): IFakeCar => {
+const makeFakeCar = (): ICreateCartDTO => {
   return {
     name: "any_name",
     description: "any description",
