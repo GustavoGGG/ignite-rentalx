@@ -1,6 +1,5 @@
 import { inject, injectable } from "tsyringe"
 import { AppError } from "@shared/errors/AppError"
-import { CategoriesRepository } from "@modules/cars/infra/typeorm/repositories/CategoriesRepository"
 import { ICategoriesRepository } from "@modules/cars/repositories/protocols/ICategoriesRepository"
 
 interface IRequest {
@@ -10,7 +9,7 @@ interface IRequest {
 @injectable()
 class CreateCategoryUseCase {
   constructor(
-    @inject(CategoriesRepository)
+    @inject("CategoriesRepository")
     private categoriesRepository: ICategoriesRepository) {
   }
 
@@ -19,7 +18,7 @@ class CreateCategoryUseCase {
     if (categoryAlreadyExists) {
       throw new AppError("Category already exists!")
     }
-    this.categoriesRepository.create({ name, description })
+    await this.categoriesRepository.create({ name, description })
   }
 
 }
