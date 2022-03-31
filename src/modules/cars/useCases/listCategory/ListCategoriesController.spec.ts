@@ -41,9 +41,9 @@ describe('List Categories Controller', () => {
     `)
   })
 
-  afterAll(() => {
-    connection.dropDatabase;
-    connection.close;
+  afterAll(async () => {
+    await connection.dropDatabase();
+    await connection.close();
   })
 
   test('should be able to list all categories', async () => {
