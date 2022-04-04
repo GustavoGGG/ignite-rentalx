@@ -10,7 +10,7 @@ import createConnection from "@shared/infra/typeorm"
 import "@shared/container"
 import { AppError } from '@shared/errors/AppError';
 
-createConnection('database_ignite')
+createConnection("database_ignite")
 
 const app = express()
 

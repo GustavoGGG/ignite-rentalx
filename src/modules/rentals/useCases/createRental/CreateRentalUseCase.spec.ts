@@ -6,19 +6,23 @@ import { AppError } from "@shared/errors/AppError";
 import { CreateRentalUseCase } from "./CreateRentalUseCase";
 import { IDateProvider } from "@shared/container/providers/DateProvider/protocols/IDateProvider";
 import { DayjsDateProvider } from "@shared/container/providers/DateProvider/implementations/DayjsDateProvider";
+import { ICarsRepository } from "@modules/cars/repositories/protocols/ICarsRepository";
+import { CarsRepositoryInMemory } from "@modules/cars/repositories/in-memory/CarsRepositoryInMemory";
 
 
 
 interface ISut {
   createRentalUseCase: CreateRentalUseCase;
   rentalsRepository: IRentalsRepository;
-  dayjsDateProvider: IDateProvider
+  dayjsDateProvider: IDateProvider;
+  carsRepository: ICarsRepository;
 }
 const makeSut = (): ISut => {
   const rentalsRepository = new RentalsRepositoryInMemory()
+  const carsRepository = new CarsRepositoryInMemory()
   const dayjsDateProvider = new DayjsDateProvider()
-  const createRentalUseCase = new CreateRentalUseCase(rentalsRepository, dayjsDateProvider)
-  return { createRentalUseCase, rentalsRepository, dayjsDateProvider }
+  const createRentalUseCase = new CreateRentalUseCase(rentalsRepository, dayjsDateProvider, carsRepository)
+  return { createRentalUseCase, rentalsRepository, dayjsDateProvider, carsRepository }
 }
 
 const makeFakeRental = (): ICreateRentalDTO => {
