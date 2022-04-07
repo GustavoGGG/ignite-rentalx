@@ -50,28 +50,24 @@ describe('Authenticate User Use Case', () => {
   })
 
   test('should not be able to authenticate an nonexistent user', async () => {
-
-    expect(async () => {
-      const { authenticateUserUseCase } = makeSut()
-      const { email, password } = makeFakeUser()
-      await authenticateUserUseCase.execute({
-        email,
-        password
-      })
-    }).rejects.toBeInstanceOf(AppError)
+    const { authenticateUserUseCase } = makeSut()
+    const { email, password } = makeFakeUser()
+    const promise = authenticateUserUseCase.execute({
+      email,
+      password
+    })
+    expect(promise).rejects.toEqual(new AppError("Email or password incorrect!"))
   })
 
   test('should not be able to authenticate with incorrect password', async () => {
-
-    expect(async () => {
-      const { authenticateUserUseCase, createUserUseCase } = makeSut()
-      await createUserUseCase.execute(makeFakeUser())
-      const { email } = makeFakeUser()
-      await authenticateUserUseCase.execute({
-        email,
-        password: "incorrect password"
-      })
-    }).rejects.toBeInstanceOf(AppError)
+    const { authenticateUserUseCase, createUserUseCase } = makeSut()
+    await createUserUseCase.execute(makeFakeUser())
+    const { email } = makeFakeUser()
+    const promise = authenticateUserUseCase.execute({
+      email,
+      password: "incorrect password"
+    })
+    expect(promise).rejects.toEqual(new AppError("Email or password incorrect!"))
   })
 
 })

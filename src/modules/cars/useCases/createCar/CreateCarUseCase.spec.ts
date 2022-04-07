@@ -32,14 +32,13 @@ describe('Create Car', () => {
     expect(car).toHaveProperty("id")
   })
 
-  test('should not be able to create a car with exists license plate', () => {
-    expect(async () => {
-      const { createCarUseCase } = makeSut()
-      const car = makeFakeCar()
-      await createCarUseCase.execute(car)
-      car.name = 'Car2'
-      await createCarUseCase.execute(car)
-    }).rejects.toBeInstanceOf(AppError)
+  test('should not be able to create a car with exists license plate', async () => {
+    const { createCarUseCase } = makeSut()
+    const car = makeFakeCar()
+    await createCarUseCase.execute(car)
+    car.name = 'Car2'
+    const promise = createCarUseCase.execute(car)
+    expect(promise).rejects.toEqual(new AppError("Car already exists!"))
   })
   test('should be able to create a car with available true by default', async () => {
     const { createCarUseCase } = makeSut()

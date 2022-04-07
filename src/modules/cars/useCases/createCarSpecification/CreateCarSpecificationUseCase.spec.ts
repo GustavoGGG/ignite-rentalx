@@ -50,7 +50,7 @@ describe('Create Car Specification', () => {
   test('should not be able to add a new specification to now-existent car', async () => {
     const { createCarSpecificationUseCase } = makeSut();
     const promise = createCarSpecificationUseCase.execute(makeFakeCarSpecification())
-    expect(promise).rejects.toBeInstanceOf(AppError)
+    expect(promise).rejects.toEqual(new AppError("Car does not exists!"))
     //   expect(async () => {
     //     const { createCarSpecificationUseCase } = makeSut();
     //        const car = await carsRepository.create(makeFakeCar())

@@ -37,6 +37,6 @@ describe(' Create Category UseCase', () => {
       const { name, description } = makeFakeCategory()
       await createCategoryUseCase.execute({ name, description })
       await createCategoryUseCase.execute({ name, description })
-    }).rejects.toBeInstanceOf(AppError)
+    }).rejects.toEqual(new AppError("Category already exists!"))
   })
 })
