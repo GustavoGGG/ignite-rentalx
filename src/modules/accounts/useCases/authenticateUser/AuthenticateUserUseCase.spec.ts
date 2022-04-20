@@ -3,11 +3,17 @@ import { IUsersRepository } from "@modules/accounts/repositories/protocols/IUser
 import { CreateUserUseCase } from "@modules/accounts/useCases/createUser/CreateUserUseCase";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase"
 import { AppError } from "@shared/errors/AppError";
+import { IUsersTokensRepository } from "@modules/accounts/repositories/protocols/IUsersTokensRepository";
+import { UsersTokensRepositoryInMemory } from "@modules/accounts/repositories/in-memory/UsersTokensRepositoryInMemory";
+import { IDateProvider } from "@shared/container/providers/DateProvider/protocols/IDateProvider";
+import { DayjsDateProvider } from "@shared/container/providers/DateProvider/implementations/DayjsDateProvider";
 
 interface ISutAuthenticate {
   userRepositoryInMemory: IUsersRepository;
   authenticateUserUseCase: AuthenticateUserUseCase;
   createUserUseCase: CreateUserUseCase;
+  usersTokensRepositoryInMemory: IUsersTokensRepository;
+  dataProvider: IDateProvider;
 }
 
 interface IFakeUser {
@@ -28,12 +34,18 @@ const makeFakeUser = (): IFakeUser => {
 describe('Authenticate User Use Case', () => {
   const makeSut = (): ISutAuthenticate => {
     const userRepositoryInMemory = new UserRepositoryInMemory();
-    const authenticateUserUseCase = new AuthenticateUserUseCase(userRepositoryInMemory)
+    const usersTokensRepositoryInMemory = new UsersTokensRepositoryInMemory();
+    const dataProvider = new DayjsDateProvider()
+    const authenticateUserUseCase = new AuthenticateUserUseCase(userRepositoryInMemory,
+      usersTokensRepositoryInMemory,
+      dataProvider)
     const createUserUseCase = new CreateUserUseCase(userRepositoryInMemory)
     return {
       userRepositoryInMemory,
       authenticateUserUseCase,
-      createUserUseCase
+      createUserUseCase,
+      usersTokensRepositoryInMemory,
+      dataProvider
     }
   }
 

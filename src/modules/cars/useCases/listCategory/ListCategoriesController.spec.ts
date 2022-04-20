@@ -48,12 +48,12 @@ describe('List Categories Controller', () => {
 
   test('should be able to list all categories', async () => {
     const responseToken = await request(app).post("/sessions").send(makeFakeUser());
-    const { token } = responseToken.body;
+    const { refresh_token } = responseToken.body;
     await request(app)
       .post("/categories")
       .send(makeFakeCategory())
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       });
     const response = await request(app).get("/categories")
     expect(response.status).toBe(200);

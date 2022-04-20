@@ -48,24 +48,24 @@ describe('Create Category Controller', () => {
 
   test('should be able to create a new category', async () => {
     const responseToken = await request(app).post("/sessions").send(makeFakeUser());
-    const { token } = responseToken.body;
+    const { refresh_token } = responseToken.body;
     const response = await request(app)
       .post("/categories")
       .send(makeFakeCategory())
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       });
     expect(response.status).toBe(201);
   })
 
   test('should not be able to create a new category with name exists', async () => {
     const responseToken = await request(app).post("/sessions").send(makeFakeUser());
-    const { token } = responseToken.body;
+    const { refresh_token } = responseToken.body;
     const response = await request(app)
       .post("/categories")
       .send(makeFakeCategory())
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       });
     expect(response.status).toBe(400);
   });
